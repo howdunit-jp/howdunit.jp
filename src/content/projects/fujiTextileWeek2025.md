@@ -1,6 +1,6 @@
 ---
 title: "forming patterns for FTW2025"
-titleJa: "オービットランタン"
+titleJa: "forming patterns for FTW2025"
 year: 2025
 category: "Art"
 categoryJa: "アート"
@@ -8,7 +8,6 @@ description: "An art work"
 descriptionJa: " 立体変形するジャカード織を用いたインスタレーション。富士山の形をフォーマットとして、部屋の全体に布を垂らしこむことで、部屋の中を移動する中で景色が劇的に変化し、異なる気圏へと移動したかのような体験をもたらす。"
 cover: "/projects/fujiTextileWeek2025/cover.jpg"
 gallery:
-  - "/projects/fujiTextileWeek2025/01.jpg"
   - "/projects/fujiTextileWeek2025/cover.jpg"
   - "/projects/fujiTextileWeek2025/02.jpg"
   - "/projects/fujiTextileWeek2025/03.jpg"
