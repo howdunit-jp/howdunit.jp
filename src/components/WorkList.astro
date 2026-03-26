@@ -1,0 +1,26 @@
+---
+const { projects = [] } = Astro.props;
+---
+<section class="work-index" aria-label="Projects">
+  <ul class="work-list">
+    {projects.map((project) => (
+      <li class="work-item">
+        <a class="work-item__link" href={`/work/${project.slug}`}>
+          <div class="work-item__media">
+            <img class="work-item__image" src={project.data.cover} alt={project.data.title} loading="lazy" />
+            <div class="work-item__panel">
+              <div class="work-item__panel-inner">
+                <p class="work-item__title">{project.data.title}</p>
+                <p class="work-item__meta">
+                  <span class="work-item__year">{project.data.year}</span>
+                  <span class="work-item__sep"> / </span>
+                  <span class="work-item__category">{project.data.category}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

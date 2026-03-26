@@ -1,0 +1,12 @@
+---
+const { images = [], title = '', imageCredits = [] } = Astro.props;
+const creditMap = new Map(imageCredits.map(({ image, credit }) => [image, credit]));
+---
+<section class="project-gallery" aria-label="Project images">
+  {images.map((src, index) => (
+    <figure>
+      <img src={src} alt={`${title} image ${index + 1}`} loading="lazy" />
+      {creditMap.has(src) ? <figcaption class="project-gallery__credit">{creditMap.get(src)}</figcaption> : null}
+    </figure>
+  ))}
+</section>

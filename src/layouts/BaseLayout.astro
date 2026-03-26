@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+  mainClass?: string;
+}
+const {
+  title = 'HOWDUNIT',
+  description = 'HOWDUNIT is an experimental design studio that starts from observing phenomena and acquires principles governing forms and functions.',
+  bodyClass = '',
+  mainClass = '',
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og-default.jpg" />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class={bodyClass}>
+    <div class="site-shell">
+      <Header pathname={pathname} />
+      <main class:list={['site-main', mainClass]}>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

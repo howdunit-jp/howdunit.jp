@@ -1,0 +1,30 @@
+---
+const { project } = Astro.props;
+---
+<section class="project-intro">
+  <div>
+    <h1 class="project-title">{project.data.title}</h1>
+    <p class="project-meta">{project.data.year} / {project.data.category}</p>
+  </div>
+  <div>
+    <div class="project-desc">
+      <p>{project.data.description}</p>
+      <p class="jp">{project.data.descriptionJa}</p>
+    </div>
+
+    <dl class="project-credits">
+      {project.data.credits.map((credit) => (
+        <div class="project-credits-row">
+          <dt>{credit.role}</dt>
+          <dd>{credit.name}</dd>
+        </div>
+      ))}
+      {project.data.awards?.map((award) => (
+        <div class="project-credits-row">
+          <dt>Award</dt>
+          <dd>{award}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

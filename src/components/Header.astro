@@ -1,0 +1,14 @@
+---
+const { pathname = "/" } = Astro.props;
+---
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <img src="/logo/logo-wordmark.svg" alt="HOWDUNIT" width="186" height="28" />
+    </a>
+    <nav class="site-header__nav" aria-label="Primary">
+      <a href="/work" aria-current={pathname.startsWith('/work') ? 'page' : undefined}>WORK</a>
+      <a href="/about" aria-current={pathname === '/about' ? 'page' : undefined}>ABOUT</a>
+    </nav>
+  </div>
+</header>

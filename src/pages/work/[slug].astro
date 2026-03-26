@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectMeta from '../../components/ProjectMeta.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects'))
+    .filter((project) => !project.data.draft)
+    .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const projects = (await getCollection('projects'))
+  .filter((item) => !item.data.draft)
+  .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
+const currentIndex = projects.findIndex((item) => item.id === project.id);
+const prev = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : undefined;
+const next = currentIndex > 0 ? projects[currentIndex - 1] : undefined;
+---
+<BaseLayout title={`${project.data.title} — HOWDUNIT`} description={project.data.description}>
+  <article class="project-page container">
+    <ProjectMeta project={project} />
+    <ProjectGallery images={project.data.gallery} title={project.data.title} imageCredits={project.data.galleryCredits ?? []} />
+
+    <nav class="project-pagination" aria-label="Project navigation">
+      {prev ? <a href={`/work/${prev.slug}`}>← {prev.data.title}</a> : <span aria-hidden="true"></span>}
+      {next ? <a href={`/work/${next.slug}`}>{next.data.title} →</a> : <span aria-hidden="true"></span>}
+    </nav>
+  </article>
+</BaseLayout>

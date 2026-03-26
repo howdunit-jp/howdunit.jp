@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutSection from '../components/AboutSection.astro';
+---
+<BaseLayout title="About — HOWDUNIT" description="About HOWDUNIT.">
+  <article class="about-page container">
+    <AboutSection heading="Statement">
+      <p> HOWDUNIT is a design studio that explores how forms and functions come into being. By continually asking how things are made, we aim to discover new possibilities in design. In a world filled with meaning and information, we focus on the underlying processes that do not carry meaning on their own. Through this approach, we look for moments when new meaning begins to emerge.</p>
+      <p class="jp">HOWDUNITは形態や機能を生み出す「成り立ち」を問い続けることによって、新しい形態や機能に辿り着くことを目指すデザインスタジオです。意味や内容にあふれた現代で、それ自体では何も意味しない「成り立ち」を純化させるプロセスの中で、新しい意味が立ち上がる瞬間を模索しています。</p>
+    </AboutSection>
+
+    <AboutSection heading="Founder">
+      <div class="founder-grid">
+        <article class="founder-card">
+          <h3 class="founder-name">Haruto Kamijo</h3>
+          <p class="founder-name-ja jp">上條陽斗</p>
+          <p class="founder-role">Designer / Artist</p>
+          <p>Born in Tokyo in 2000. Currently a doctoral student in the Department of Architecture at the Graduate School of Engineering, The University of Tokyo. Engages in interdisciplinary work across design, art, and research, weaving these three domains together.</p>
+          <p class="jp">2000年東京都生まれ。東京大学大学院工学系研究科建築学専攻博士課程在籍。デザイン、アート、研究の3軸を相互に噛み合わせながら領域横断的な活動を行う。</p>
+        </article>
+        <article class="founder-card">
+          <h3 class="founder-name">Sho Tasaki</h3>
+          <p class="founder-name-ja jp">田崎 祥</p>
+          <p class="founder-role">Designer / Artist</p>
+          <p>Based in Tokyo. Works in architectural practice.</p>
+          <p class="jp">東京を拠点に、設計事務所にて建築設計を行う。</p>
+        </article>
+      </div>
+    </AboutSection>
+
+    <AboutSection heading="Selected exhibitions / projects / awards">
+      <ul class="about-list">
+        <li><span class="about-year">2024</span><span>peco‑poco — YAMAGIWA UNDER 25 IDEA &amp; DESIGN COMPETITION Grand Prize</span></li>
+      </ul>
+    </AboutSection>
+
+    <AboutSection heading="Contact">
+      <p><a class="link-accent" href="mailto:info@howdunit.jp">info@howdunit.jp</a></p>
+    </AboutSection>
+  </article>
+</BaseLayout>

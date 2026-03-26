@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects'))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
+---
+<BaseLayout title="HOWDUNIT" description="Curiosity drives." bodyClass="page-home" mainClass="site-main--home">
+  <section class="home-slideshow" aria-label="Featured works slideshow">
+    <div class="home-slideshow__label container">
+      <p class="home-slideshow__eyebrow">Featured works</p>
+    </div>
+
+    <div class="home-slideshow__track">
+      {projects.map((project, index) => (
+        <article class:list={['home-slide', { 'is-active': index === 0 }]} data-home-slide>
+          <a class="home-slide__link" href={`/work/${project.slug}`}>
+            <img class="home-slide__image" src={project.data.cover} alt={project.data.title} loading={index === 0 ? 'eager' : 'lazy'} />
+            <div class="home-slide__overlay"></div>
+            <div class="home-slide__meta container">
+              <p class="home-slide__kicker">{project.data.year} / {project.data.category}</p>
+              <h1 class="home-slide__title">{project.data.title}</h1>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="home-slideshow__status container" aria-hidden="true">
+      <span class="home-slideshow__count">01</span>
+      <div class="home-slideshow__progress"><span data-home-progress></span></div>
+      <span class="home-slideshow__total">{String(projects.length).padStart(2, '0')}</span>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const slides = Array.from(document.querySelectorAll('[data-home-slide]'));
+      const progress = document.querySelector('[data-home-progress]');
+      if (slides.length < 2) return;
+
+      const count = document.querySelector('.home-slideshow__count');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const intervalMs = reduced ? 7000 : 5000;
+      let active = 0;
+
+      const sync = (index) => {
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('is-active', slideIndex === index);
+        });
+        if (count) count.textContent = String(index + 1).padStart(2, '0');
+        if (progress) {
+          progress.getAnimations().forEach((animation) => animation.cancel());
+          progress.animate(
+            [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+            { duration: intervalMs, easing: 'linear', fill: 'forwards' }
+          );
+        }
+      };
+
+      sync(active);
+      window.setInterval(() => {
+        active = (active + 1) % slides.length;
+        sync(active);
+      }, intervalMs);
+    })();
+  </script>
+</BaseLayout>
